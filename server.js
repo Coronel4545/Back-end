@@ -17,9 +17,18 @@ app.use(cors({
 
 app.use(express.json());
 
+// Verifica se a variável de ambiente existe
+const WSS_ENDPOINT = process.env.BSC_TESTNET_WSS || 'wss://bsc-testnet.publicnode.com';
+
 // Função para criar conexão WebSocket com retry
 function createWeb3WSProvider() {
-    const provider = new Web3.providers.WebsocketProvider(process.env.BSC_TESTNET_WSS, {
+    console.log('Tentando conectar ao endpoint:', WSS_ENDPOINT); // Log para debug
+
+    if (!WSS_ENDPOINT) {
+        throw new Error('BSC_TESTNET_WSS não está definido');
+    }
+
+    const provider = new Web3.providers.WebsocketProvider(WSS_ENDPOINT, {
         reconnect: {
             auto: true,
             delay: 5000,
