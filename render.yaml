@@ -12,6 +12,6 @@
       - key: MONGODB_URI
         sync: false
       - key: ALLOWED_ORIGINS
-        value: https://seu-site.netlify.app
+        value: https://front-endrampayment.netlify.app
     healthCheckPath: /health
     autoDeploy: true
