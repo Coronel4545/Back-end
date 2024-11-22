@@ -1,0 +1,17 @@
+ services:
+  - type: web
+    name: ram-payment-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BSC_TESTNET_WSS
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://seu-site.netlify.app
+    healthCheckPath: /health
+    autoDeploy: true
