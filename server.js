@@ -244,10 +244,14 @@ process.on('unhandledRejection', (error) => {
     console.error('🔥 Erro não tratado:', error);
 });
 
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
     console.log('📴 Recebido sinal SIGTERM, encerrando graciosamente...');
-    mongoose.connection.close(() => {
+    try {
+        await mongoose.connection.close();
         console.log('🔌 MongoDB desconectado através de encerramento do app');
         process.exit(0);
-    });
+    } catch (err) {
+        console.error('Erro ao fechar conexão:', err);
+        process.exit(1);
+    }
 });
