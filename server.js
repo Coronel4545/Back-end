@@ -146,11 +146,7 @@ function startEventListener() {
         console.log('🎯 Listener conectado com ID:', subscriptionId);
     })
     .on('data', async (event) => {
-        console.log('📨 Novo evento recebido:', {
-            transactionHash: event.transactionHash,
-            userAddress: event.returnValues.user,
-            timestamp: new Date().toISOString()
-        });
+        console.log('📨 Novo evento recebido - URL:', event.returnValues.url);
 
         try {
             const urlEvent = new UrlEvent({
