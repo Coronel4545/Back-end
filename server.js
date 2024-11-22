@@ -54,7 +54,57 @@ function createWeb3WSProvider() {
 
 const web3 = new Web3(createWeb3WSProvider());
 
-// ... ABI e CONTRACT_ADDRESS permanecem iguais ...
+// ABI do contrato de processamento
+const CONTRACT_ABI = [
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "payer",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "PaymentReceived",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "url",
+                "type": "string"
+            }
+        ],
+        "name": "WebsiteUrlReturned",
+        "type": "event"
+    }
+    // ... outros eventos e funções não são necessários para o monitoramento
+];
+
+// Endereço do contrato
+const CONTRACT_ADDRESS = '0xE32B23224204fCE45d870A18565030125a2f4508';
+
+// Inicializa o contrato
+const contract = new web3.eth.Contract(
+    CONTRACT_ABI,
+    CONTRACT_ADDRESS
+);
 
 // Adiciona timestamp de última conexão ao schema
 const urlEventSchema = new mongoose.Schema({
