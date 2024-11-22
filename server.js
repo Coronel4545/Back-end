@@ -3,7 +3,7 @@ const Web3 = require('web3');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-
+const update= true; //Apenas para o render.com subir atualizações
 dotenv.config();
 
 const app = express();
