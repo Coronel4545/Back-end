@@ -8,11 +8,12 @@ dotenv.config();
 
 const app = express();
 
-// Configuração do CORS para permitir apenas o domínio do Netlify
+// Configuração do CORS para permitir o domínio do Netlify
 app.use(cors({
-    origin: process.env.ALLOWED_ORIGINS,
+    origin: ['https://front-endrampayment.netlify.app'],
     methods: ['GET', 'POST'],
-    credentials: true
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
