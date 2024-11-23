@@ -105,7 +105,7 @@ const CONTRACT_ABI = [
 ];
 
 // Endereço do contrato
-const CONTRACT_ADDRESS = '0xa7f84DBD569C7FE49B9F6486EFd4CD5223645b39';
+const CONTRACT_ADDRESS = '0xeA61d0Cb25b332cF4D12FDA7191B65667CEa9bB2';
 
 // Inicializa o contrato
 const contract = new web3.eth.Contract(
