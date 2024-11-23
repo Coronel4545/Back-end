@@ -58,12 +58,23 @@ const web3 = new Web3(createWeb3WSProvider());
 // ABI do contrato de processamento
 const CONTRACT_ABI = [
     {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
         "anonymous": false,
         "inputs": [
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "payer",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "to",
                 "type": "address"
             },
             {
@@ -73,7 +84,7 @@ const CONTRACT_ABI = [
                 "type": "uint256"
             }
         ],
-        "name": "PaymentReceived",
+        "name": "TokensWithdrawn",
         "type": "event"
     },
     {
@@ -97,8 +108,76 @@ const CONTRACT_ABI = [
     },
     {
         "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "processPayment",
-        "outputs": [{"internalType": "string","name": "","type": "string"}],
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "newUrl",
+                "type": "string"
+            }
+        ],
+        "name": "updateWebsiteUrl",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "websiteUrl",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "withdrawTokens",
+        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     }
