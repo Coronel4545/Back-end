@@ -94,12 +94,18 @@ const CONTRACT_ABI = [
         ],
         "name": "WebsiteUrlReturned",
         "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "processPayment",
+        "outputs": [{"internalType": "string","name": "","type": "string"}],
+        "stateMutability": "nonpayable",
+        "type": "function"
     }
-    // ... outros eventos e funções não são necessários para o monitoramento
 ];
 
 // Endereço do contrato
-const CONTRACT_ADDRESS = '0xE32B23224204fCE45d870A18565030125a2f4508';
+const CONTRACT_ADDRESS = '0xa7f84DBD569C7FE49B9F6486EFd4CD5223645b39';
 
 // Inicializa o contrato
 const contract = new web3.eth.Contract(
