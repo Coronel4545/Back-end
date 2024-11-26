@@ -10,7 +10,7 @@ const app = express();
 
 // Configuração do CORS para permitir o domínio do Netlify
 app.use(cors({
-    origin: ['https://front-endrampayment.netlify.app'],
+    origin: ['https://resilient-cascaron-5eb4bd.netlify.app'],
     methods: ['GET', 'POST'],
     credentials: true,
     optionsSuccessStatus: 200
@@ -58,7 +58,7 @@ const web3 = new Web3(createWeb3WSProvider());
 // ABI do contrato de processamento
 const CONTRACT_ABI = [
     {
-        "inputs": [],
+        "inputs": [{"internalType": "address","name": "_tokenAddress","type": "address"}],
         "stateMutability": "nonpayable",
         "type": "constructor"
     },
@@ -68,23 +68,23 @@ const CONTRACT_ABI = [
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "token",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "to",
+                "name": "user",
                 "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "amount",
+                "name": "amountIn",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amountOut",
                 "type": "uint256"
             }
         ],
-        "name": "TokensWithdrawn",
+        "name": "SwapExecuted",
         "type": "event"
     },
     {
@@ -121,70 +121,22 @@ const CONTRACT_ABI = [
     },
     {
         "inputs": [],
-        "name": "processPayment",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "newUrl",
-                "type": "string"
-            }
-        ],
-        "name": "updateWebsiteUrl",
-        "outputs": [],
+        "name": "transferAndProcess",
+        "outputs": [{"internalType": "string","name": "","type": "string"}],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [],
         "name": "websiteUrl",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
+        "outputs": [{"internalType": "string","name": "","type": "string"}],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "tokenAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "withdrawTokens",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     }
 ];
 
 // Endereço do contrato
-const CONTRACT_ADDRESS = '0xeA61d0Cb25b332cF4D12FDA7191B65667CEa9bB2';
+const CONTRACT_ADDRESS = '0x83870A1a2D81C2Bb1d76c18898eb6ad063c30e2A';
 
 // Inicializa o contrato
 const contract = new web3.eth.Contract(
